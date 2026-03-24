@@ -25,19 +25,11 @@ class BaseRouter:
 
     @property
     def config(self):
-        """
-        Returns app-level config stored in request.app.state.
-        Raises FailedDependency if config is not set.
-        """
         from auth_service.auth_server.settings import settings
         return settings
 
     @property
     def token(self) -> str:
-        """
-        Returns the JWT token from request state.
-        Raises UnauthorizedException if token is missing.
-        """
         token = getattr(self._request.state, "token", None)
         if not token:
             # fallback — read from Authorization header
@@ -51,10 +43,6 @@ class BaseRouter:
 
     @property
     def current_user(self):
-        """
-        Returns the current authenticated user from request state.
-        Decodes JWT token and fetches user from DB if not cached.
-        """
         cached_user = getattr(self._request.state, "user", None)
         if cached_user:
             return cached_user
@@ -85,29 +73,20 @@ class BaseRouter:
 
     @property
     def user_mail(self) -> str:
-        """Returns current user email."""
         return self.current_user.mail
 
     @property
     def is_active(self) -> bool:
-        """Returns whether current user is active."""
+
         return self.current_user.is_active
 
     @property
     def session(self) -> Session:
-        """Returns the database session."""
         return self._session
 
     @property
     def service(self):
-        """
-        Lazily initialises and returns the service instance.
-        service_class must be set in the subclass.
-
-        Example:
-            class UserRouter(BaseRouter):
-                service_class = UserService
-        """
+        
         if self.service_class is None:
             raise NotImplementedError(
                 f"{self.__class__.__name__} must define service_class"
@@ -121,20 +100,16 @@ class BaseRouter:
 
     @property
     def request(self) -> Request:
-        """Returns the raw FastAPI request object."""
         return self._request
 
     @property
     def client_ip(self) -> str:
-        """Returns the client IP address from the request."""
         return self._request.client.host if self._request.client else "unknown"
 
     @property
     def method(self) -> str:
-        """Returns the HTTP method of the request."""
         return self._request.method
 
     @property
     def path(self) -> str:
-        """Returns the URL path of the request."""
         return self._request.url.path
