@@ -20,7 +20,6 @@ class BaseService(Generic[ModelT]):
         self._config     = None
         self._model_type = None
 
-    # ── Token ─────────────────────────────────────────────────────────────────
 
     @property
     def token(self) -> str:
@@ -34,7 +33,6 @@ class BaseService(Generic[ModelT]):
             self._token = token
         return self._token
 
-    # ── User ──────────────────────────────────────────────────────────────────
 
     @property
     def user(self):
@@ -47,7 +45,6 @@ class BaseService(Generic[ModelT]):
             return user.id
         return None
 
-    # ── Config ────────────────────────────────────────────────────────────────
 
     @property
     def config(self):
@@ -56,7 +53,7 @@ class BaseService(Generic[ModelT]):
             self._config = settings
         return self._config
 
-    # ── Model type ────────────────────────────────────────────────────────────
+
 
     @property
     def model_type(self):
@@ -69,13 +66,12 @@ class BaseService(Generic[ModelT]):
             f"{self.__class__.__name__} must implement _get_model_type()"
         )
 
-    # ── Session ───────────────────────────────────────────────────────────────
+  
 
     @property
     def session(self) -> Session:
         return self._session
 
-    # ── CRUD operations ───────────────────────────────────────────────────────
 
     def get_by_id(self, record_id) -> ModelT:
         record = self._session.query(self.model_type).filter(

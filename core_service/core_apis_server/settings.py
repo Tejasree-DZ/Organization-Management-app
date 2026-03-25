@@ -8,7 +8,6 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    # Database (Neon PostgreSQL - Core Service DB)
     MYSQL_DB_HOST:          str = "ep-aged-sound-anyzwg5i-pooler.c-6.us-east-1.aws.neon.tech"
     MYSQL_DB_PORT:          int = 5432
     MYSQL_DB_USER_NAME:     str = "neondb_owner"
