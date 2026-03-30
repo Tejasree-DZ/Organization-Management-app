@@ -19,3 +19,8 @@ core_service/venv/
 Thumbs.db
 
 *.sqlite3
+.archexa_cache/
+
+generated/
+archexa-windows-x86_64.exe
+archexa.yaml

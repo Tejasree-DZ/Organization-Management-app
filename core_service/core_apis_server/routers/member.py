@@ -55,7 +55,10 @@ async def list_members(
     _: str = Depends(get_current_user),
 ):
     members, total = await service_router.service.list_members_by_team(
-        team_id, skip=skip, limit=limit)
+        team_id,
+        skip  = skip,
+        limit = limit,
+    )
     return MemberListResponse(
         members=[m.to_schema() for m in members],
         total=total,

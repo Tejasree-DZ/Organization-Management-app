@@ -27,6 +27,7 @@ class OrganizationResponse(BaseModel):
     id:            str
     name:          str
     description:   Optional[str] = None
+    created_by:    Optional[str] = None
     teams_count:   int
     members_count: int
     created_at:    int

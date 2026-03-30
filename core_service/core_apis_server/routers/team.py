@@ -55,14 +55,18 @@ async def list_teams(
     _: str = Depends(get_current_user),
 ):
     teams, total = await service_router.service.list_teams_by_organization(
-        organization_id, skip=skip, limit=limit)
+        organization_id,
+        skip  = skip,
+        limit = limit,
+    )
     return TeamListResponse(
         teams=[t.to_schema() for t in teams],
         total=total,
     )
 
 
-@router.get("/teams/{team_id}", response_model=TeamResponse)
+@router.get("/teams/{team_id}",
+            response_model=TeamResponse)
 async def get_team(
     team_id: str,
     service_router: TeamRouter = Depends(get_team_router),
@@ -74,7 +78,8 @@ async def get_team(
         raise HTTPException(status_code=404, detail=e.message)
 
 
-@router.patch("/teams/{team_id}", response_model=TeamResponse)
+@router.patch("/teams/{team_id}",
+              response_model=TeamResponse)
 async def update_team(
     team_id: str,
     payload: TeamUpdate,

@@ -54,7 +54,10 @@ async def list_organizations(
     _: str = Depends(get_current_user),
 ):
     organizations, total = await service_router.service.list_organizations(
-        skip=skip, limit=limit)
+        user_id = service_router.user_id,
+        skip    = skip,
+        limit   = limit,
+    )
     return OrganizationListResponse(
         organizations=[o.to_schema() for o in organizations],
         total=total,

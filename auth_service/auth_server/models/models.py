@@ -34,7 +34,7 @@ class PermissionKeys:
 
 
 class ColumnPermissions:
-    full        = {PermissionKeys.is_creatable: True,  PermissionKeys.is_updatable: True}
+    full = {PermissionKeys.is_creatable: True,  PermissionKeys.is_updatable: True}
     create_only = {PermissionKeys.is_creatable: True,  PermissionKeys.is_updatable: False}
     update_only = {PermissionKeys.is_creatable: False, PermissionKeys.is_updatable: True}
 

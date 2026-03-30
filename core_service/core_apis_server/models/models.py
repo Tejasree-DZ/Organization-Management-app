@@ -68,6 +68,7 @@ class Organization(Base, BaseModel):
                            info=ColumnPermissions.full)
     description   = Column(TEXT, nullable=True,
                            info=ColumnPermissions.full)
+    created_by    = Column(String(36), nullable=True)
     teams_count   = Column(Integer, nullable=False, default=0)
     members_count = Column(Integer, nullable=False, default=0)
 
@@ -83,9 +84,10 @@ class Organization(Base, BaseModel):
                          name='uq_organization_name_deleted_at'),
     )
 
-    def __init__(self, name=None, description=None):
+    def __init__(self, name=None, description=None, created_by=None):
         self.name        = name
         self.description = description
+        self.created_by  = created_by
 
     def to_schema(self):
         from core_service.core_apis_server.schemas.organization import OrganizationResponse
